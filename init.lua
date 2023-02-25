@@ -9,7 +9,6 @@ notes for a baby
 require('plugins')
 require('keymaps')
 require('build')
-require('reload')
 
 
 -- disable netrw, recommended by nvim-tree maintainer

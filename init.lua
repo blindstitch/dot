@@ -27,18 +27,21 @@ require('keymaps')
 require('plugins')
 require('build')
 require('lsp')
+require('autosave')
 
 
-vim.opt.number = true
 -- vim.opt.swapfile = false
 
 -- Suspect that globals don't belong in here
 -- vim.opt.sessionoptions = 'buffers,curdir,folds,localoptions,options'
 
+vim.opt.number = true
 vim.opt.wrap = true
 vim.opt.wrap.breakat = ' '
 vim.opt.wrap.nolist = true
 vim.opt.ignorecase = true
+vim.opt.cursorline = true
+vim.opt.scrolloff = 6
 
 vim.cmd [[ colorscheme NeoSolarized ]]
 vim.cmd [[ set background=light ]]
@@ -78,7 +81,7 @@ require("nvim-tree").setup({
 --   update_cwd = true,
 -- },
 })
--- disable netrw
+-- disable netrw for nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 

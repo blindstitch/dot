@@ -18,6 +18,10 @@ keymap("n", "]", ")", opts)
  -- keymap("n", "}", "/[.,;]<CR>nl:nohls<CR>", opts)
  -- keymap("n", "{", "/[.,;]<CR>NNl:nohls<CR>", opts)
  
+-- Navigation
+-- goto file within braces in latex
+keymap("n", "<leader>gf", "vi}y:e %:p:h/<c-r>\"<CR>", opts)
+
 -- Insert mode movements and controls
 keymap("i", "<c-j>", "<Down>", opts)
 keymap("i", "<c-k>", "<Up>", opts)
@@ -30,6 +34,9 @@ keymap("i", "<c-r>", "<c-o><c-r>", opts)
 -- keymap("i", "<c-J>", "<c-o>B", opts)
 -- keymap("i", "<c-L>", "<c-o>W", opts)
 
+-- make function to alter the comment character depending on extension, should be easy.
+keymap('n', '<C-/>', "mmI# <Esc>`m", opts)
+
 -- NvimTree - not very good nerdtree replacement
 keymap("n", "<leader>nn", ":NvimTreeToggle<CR>", opts)
 
@@ -39,7 +46,7 @@ keymap("n", "<leader>tt", ":TZAtaraxis<CR>", opts) -- truezen ataraxis
 
 -- Others
 keymap("n", "<leader>ss", ":ASToggle<CR>", opts) -- toggle autosave
-keymap("n", "<leader>so", ":so %<CR>", opts) -- source current
+keymap("n", "<leader>so", ":w | :so %<CR>", opts) -- source current - redudant with ss
 keymap("n", "<leader>rr", ":lua build()<CR>", opts) -- run build command
 
 -- Undo tree
@@ -53,15 +60,27 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', ":Telescope heading<CR>", {})
 vim.keymap.set('n', '<leader>fz', ":Telescope current_buffer_fuzzy_find<CR>", {})
+vim.keymap.set('n', '<leader>fr', ":Telescope registers<CR>", {})
 
 
 -- "Nice" stuff for writing
-vim.keymap.set('n', '<leader>nf', "gqip$", {})
-vim.keymap.set('n', '<leader>nb', "vipJV:s;\\. ;.\\r;g<CR>", {})
-vim.keymap.set('n', '<leader>n1b', "vipJV:s;\\. ;.\\r;g<CR>", {})
-vim.keymap.set('n', '<leader>n2b', "vipJV:s;\\. ;.\\r\\r;g<CR>", {})
-vim.keymap.set('n', '<leader>nh-', "yypVr-o<Esc>", {})
-vim.keymap.set('n', '<leader>nh=', "yypVr=o<Esc>", {})
+vim.keymap.set('n', '<leader>nb', "vipJV:s;\\. ;.\\r;g<CR>", {}) -- break up lines (for easier analysis sentence-by-sentence).
+vim.keymap.set('n', '<leader>n1b', "vipJV:s;\\. ;.\\r;g<CR>", {}) -- presumably add a line break.
+vim.keymap.set('n', '<leader>n2b', "vipJV:s;\\. ;.\\r\\r;g<CR>", {}) -- presumably add two.
+vim.keymap.set('n', '<leader>nh-', "yypVr-o<Esc>", {}) -- add a "nice header" made of hyphens.
+vim.keymap.set('n', '<leader>nh=', "yypVr=o<Esc>", {}) -- add a "nice header" made of equal signs.
+vim.keymap.set('n', '<leader>nf', "mmvipgq`m", {}) -- formats the paragraph you're in. does not work for latex enumerate.
+vim.keymap.set('n', '<leader>nw', "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m", {})
+-- formats the paragraph using latexindent.pl
+-- -- config kind of lacking but it works. things i would like: 
+--    leave long commands alone or put on own line
+--    comments put at end of first sentence they refer to (kind of complicated if-then)
+--    i doubt i will ever get these and probably accept the quick-start1.yaml defaults for the rest of my life
+
+-- interface
+vim.keymap.set('n', '<leader>=', "2<c-w>+", {}) -- would be lovely to have this enter a mode where - and =  continue to act 
+                                                -- as window contrls, until another key is pressed.
+vim.keymap.set('n', '<leader>-', "2<c-w>-", {})
 
 -- Tex
 vim.keymap.set('n', '<leader>tpc', "a (\\cite{})<Esc>hi", {})
@@ -69,6 +88,8 @@ vim.keymap.set('n', '<leader>tpc', "a (\\cite{})<Esc>hi", {})
 -- nohls on double-escape
 vim.keymap.set('n', '<Esc><Esc>', ":nohls<CR>", {})
 
+-- nvim development
+vim.keymap.set('n', '<leader>ss', ":w | :so %<CR>", {})
 
 -- -- TexLab
 -- keymap("n", "<leader>tr", ":TexlabBuild<CR>", opts)

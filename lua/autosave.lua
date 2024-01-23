@@ -1,3 +1,5 @@
+-- Note: you need to have undotree for this to work
+--
 -- enable autosave, auto reload, disable swap
 -- you want undotree also for this to be maximally useful
 
@@ -7,8 +9,7 @@
 --
 -- A better way would be comparing the filenames -- the function should return the
 -- filename if it is gitted.
-
--- This function used by auto-save.nvim in the pluginsettings file
+--
 
 function isbufgitted()
    local bufferpath = vim.fn.expand('%')
@@ -31,3 +32,23 @@ function isbufgitted()
       return nil
    end
 end
+
+-- Autosave plugin
+require("auto-save").setup({
+  enable = true,
+    condition = function(buf)
+      -- only run for gitted buffers
+      if isbufgitted() then
+        return true
+      end
+      return false
+    end
+})
+
+-- Autocommand
+vim.api.nvim_exec([[
+    augroup IsGitted
+        autocmd!
+        autocmd BufRead * lua if isbufgitted() then vim.cmd('setlocal noswapfile') end
+    augroup END
+]], false)

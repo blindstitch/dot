@@ -1,6 +1,7 @@
+-- Auto-save settings are in autosave.lua
+
 vim.cmd [[ colorscheme NeoSolarized ]]
 vim.cmd [[ set background=light ]]
-
 
 -- nvim-tree
 vim.opt.termguicolors = true
@@ -33,16 +34,6 @@ require('scrollview').setup({
   diagnostics_severities = {vim.diagnostic.severity.ERROR},
 })
 
-require("auto-save").setup({
-  enable = true,
-    condition = function(buf)
-      -- only run for gitted buffers
-      if isbufgitted() then
-        return true
-      end
-      return false
-    end
-})
 
 
 -- Was using this more when my setup was unreliable and i was tired of opening the same buffers a lot

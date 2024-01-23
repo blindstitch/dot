@@ -1,6 +1,14 @@
 vim.cmd [[ colorscheme NeoSolarized ]]
 vim.cmd [[ set background=light ]]
 
+
+-- nvim-tree
+vim.opt.termguicolors = true
+-- disable netrw for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+require("nvim-tree").setup()
+
 local telescope = require('telescope')
 -- the extensions are not setup anymore
 telescope.setup({

@@ -3,7 +3,6 @@ local api = vim.api
 -- Silent keymap option
 local opts = { silent = true }
 
-
 -- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -65,13 +64,19 @@ vim.keymap.set('n', '<leader>n1b', "vipJV:s;\\. ;.\\r;g<CR>", {}) -- presumably 
 vim.keymap.set('n', '<leader>n2b', "vipJV:s;\\. ;.\\r\\r;g<CR>", {}) -- presumably add two.
 vim.keymap.set('n', '<leader>nh-', "yypVr-o<Esc>", {}) -- add a "nice header" made of hyphens.
 vim.keymap.set('n', '<leader>nh=', "yypVr=o<Esc>", {}) -- add a "nice header" made of equal signs.
-vim.keymap.set('n', '<leader>nf', "mmvipgq`m", {}) -- formats the paragraph you're in. does not work for latex enumerate.
-vim.keymap.set('n', '<leader>nw', "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m", {})
--- formats the paragraph using latexindent.pl
--- -- config kind of lacking but it works. things i would like: 
---    leave long commands alone or put on own line
---    comments put at end of first sentence they refer to (kind of complicated if-then)
---    i doubt i will ever get these and probably accept the quick-start1.yaml defaults for the rest of my life
+-- vim.keymap.set('n', '<leader>nf', "mmvipgq`m", {}) -- formats the paragraph you're in. does not work for latex enumerate.
+
+-- formats the paragraph using latexindent.pl if tex, latexindent still in homefolder
+local function wrap()
+   if vim.fn.expand('%:e') == "tex" then
+      return "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m"
+   else
+      return "mmvipgq`m"
+   end
+end
+
+vim.keymap.set('n', '<leader>nf', wrap(), {})
+
 
 -- interface
 vim.keymap.set('n', '<leader>=', "2<c-w>+", {}) -- would be lovely to have this enter a mode where - and =  continue to act 

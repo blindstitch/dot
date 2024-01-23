@@ -7,23 +7,25 @@
 -- (by checking if it said "fatal:" or not) and will return true if it is under
 -- version control, false if not, nil if it gets no output (unlikely).
 --
--- A better way would be comparing the filenames -- the function should return the
--- filename if it is gitted.
+-- When comparing the filenames with words[1] it might break with a space in the path.
 --
 
 function isbufgitted()
-   local bufferpath = vim.fn.expand('%')
+   -- local bufferpath = vim.fn.expand('%')
+   local filename = vim.fn.expand('%:t')
    local bufferdir = vim.fn.expand('%:p:h')
-   local cmd = 'cd '..bufferdir..'; git ls-files --error-unmatch '..bufferpath
+   local cmd = 'cd '..bufferdir..'; git ls-files --error-unmatch '..filename
    local result,exitcode = vim.fn.system(cmd)
    local words = {}
 
-   for word in result:gmatch("%S+") do
+
+   for word in result:gmatch("[^\n]+") do
       table.insert(words, word)
    end
+   
 
    if #words > 0 then
-      if words[1] ~= 'fatal:' and words[1] ~= 'error:' then
+      if words[1] == filename then
          return true
       else
          return false
@@ -32,6 +34,7 @@ function isbufgitted()
       return nil
    end
 end
+
 
 -- Autosave plugin
 require("auto-save").setup({
@@ -49,6 +52,6 @@ require("auto-save").setup({
 vim.api.nvim_exec([[
     augroup IsGitted
         autocmd!
-        autocmd BufRead * lua if isbufgitted() then vim.cmd('setlocal noswapfile') end
+        autocmd BufRead,BufEnter * lua if isbufgitted() then vim.cmd('setlocal noswapfile') end
     augroup END
 ]], false)

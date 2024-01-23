@@ -1,0 +1,19 @@
+ Things I want
+
+ changes i need to make to the syntax highlighting:
+  - coloring for tags is terrible as always. make the colors unchanging, use dark for
+    currently selected, lighter shade for the other side, or green, something unused. 
+    red conflicts too much with the color used for characters presently.
+ tex:
+  - X wrapping is very broken for figures % I have installed a text wrapping perl program and put it in the keymaps. Jankily written but it works
+
+ keymaps:
+  - changing word with cw, dw, should always behave as caw, daw - there's ce and de for the other cases
+  - c-w should not delete separator characters, it should behave more like daw.
+  - sentence movement needs fixing, there's an error with how parens are mapped.
+
+notes for a baby
+ - packer plugins must be installed with PackerInstall
+ - packer is installed with code in plugins.lua
+ - must be updated with PackerUpdate
+ - you can do subfolders and reference htem with dot notation - ex: 'lua/user/foo.nvim' is 'require('user.foo')

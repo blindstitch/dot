@@ -22,6 +22,7 @@ return require('packer').startup(function(use)
    use { 'nvim-telescope/telescope.nvim', tag = '0.1.5',
           requires = { {'nvim-lua/plenary.nvim'} }
        }
+  use 'folke/zen-mode.nvim'
  
    use 'nvim-telescope/telescope-symbols.nvim' -- whats this
    use 'crispgm/telescope-heading.nvim'

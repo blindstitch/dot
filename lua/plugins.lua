@@ -1,6 +1,8 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
+local pluginsettings = require('pluginsettings')
+
 return require('packer').startup(function(use)
 
   use {'nvim-tree/nvim-tree.lua',requires={'nvim-tree/nvim-web-devicons'}}
@@ -19,12 +21,18 @@ return require('packer').startup(function(use)
 --  use 'rmagatti/auto-session' --suspect that this does not work
   use 'okuuva/auto-save.nvim'
  
-   use { 'nvim-telescope/telescope.nvim', tag = '0.1.5',
-          requires = { {'nvim-lua/plenary.nvim'} }
-       }
+  use {'nvim-telescope/telescope.nvim', tag = '0.1.5',
+        requires = { {'nvim-lua/plenary.nvim'} }
+      }
+
   use 'folke/zen-mode.nvim'
  
-   use 'nvim-telescope/telescope-symbols.nvim' -- whats this
-   use 'crispgm/telescope-heading.nvim'
+  use 'nvim-telescope/telescope-symbols.nvim' -- whats this
+  use 'crispgm/telescope-heading.nvim'
+  use({'kdheepak/lazygit.nvim',requires={'nvim-lua/plenary.nvim'}})
+
+  -- use 'projekt0n/github-nvim-theme' -- shit sucks
+  use 'baeuml/summerfruit256.vim'
+  use 'jsit/toast.vim'
  
 end)

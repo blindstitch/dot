@@ -7,6 +7,8 @@ local opts = { silent = true }
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
+keymap("n", "zz", ":ZenMode<CR>", opts)
+
 -- Better movement, mostly to make HHKB and laptop typing less painful
 keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)
@@ -87,6 +89,10 @@ vim.keymap.set('n', '<leader>nf', "mmvip:!perl /home/karl/temp/latexindent/latex
 vim.keymap.set('n', '<leader>=', "2<c-w>+", {}) -- would be lovely to have this enter a mode where - and =  continue to act 
                                                 -- as window contrls, until another key is pressed.
 vim.keymap.set('n', '<leader>-', "2<c-w>-", {})
+vim.keymap.set('n','<c-j>',"<c-w>j", {})
+vim.keymap.set('n','<c-k>',"<c-w>k", {})
+vim.keymap.set('n','<c-h>',"<c-w>h", {})
+vim.keymap.set('n','<c-l>',"<c-w>l", {})
 
 -- Tex
 vim.keymap.set('n', '<leader>tpc', "a (\\cite{})<Esc>hi", {})
@@ -96,6 +102,9 @@ vim.keymap.set('n', '<Esc><Esc>', ":nohls<CR>", {})
 
 -- nvim development
 vim.keymap.set('n', '<leader>ss', ":w | :so %<CR>", {})
+
+-- lazygit
+vim.keymap.set('n','<leader>lg',":LazyGit<CR>")
 
 -- -- TexLab
 -- keymap("n", "<leader>tr", ":TexlabBuild<CR>", opts)

@@ -64,18 +64,23 @@ vim.keymap.set('n', '<leader>n1b', "vipJV:s;\\. ;.\\r;g<CR>", {}) -- presumably 
 vim.keymap.set('n', '<leader>n2b', "vipJV:s;\\. ;.\\r\\r;g<CR>", {}) -- presumably add two.
 vim.keymap.set('n', '<leader>nh-', "yypVr-o<Esc>", {}) -- add a "nice header" made of hyphens.
 vim.keymap.set('n', '<leader>nh=', "yypVr=o<Esc>", {}) -- add a "nice header" made of equal signs.
--- vim.keymap.set('n', '<leader>nf', "mmvipgq`m", {}) -- formats the paragraph you're in. does not work for latex enumerate.
 
--- formats the paragraph using latexindent.pl if tex, latexindent still in homefolder
-local function wrap()
-   if vim.fn.expand('%:e') == "tex" then
-      return "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m"
-   else
-      return "mmvipgq`m"
-   end
-end
+-- formats the paragraph using latexindent.pl, latexindent still in homefolder
+-- i would love to have it only operate on tex but it doesn't work well for a command that is mixing normal mode and ex commands
+-- chatgpt recommends something like this:
+-- local function run_latexindent()
+--     vim.api.nvim_feedkeys('mmvip', 'n', true)
+-- 
+--     -- Wait for a moment (adjust timing as needed)
+--     vim.defer_fn(function()
+--         -- Now you can run an ex command
+--         -- there is also vim.fn.getreg() to work with the selected text via lua
+--         vim.cmd('!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - ')
+--     end, 50)
+--     vim.api.nvim_feedkeys('`m', 'n', true)
+-- end
 
-vim.keymap.set('n', '<leader>nf', wrap(), {})
+vim.keymap.set('n', '<leader>nf', "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m", {})
 
 
 -- interface

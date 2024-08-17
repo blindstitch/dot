@@ -2,6 +2,9 @@
 
 vim.cmd [[ colorscheme NeoSolarized ]]
 vim.cmd [[ set background=light ]]
+-- disabling for now because I am using Fail Windows Ubuntu
+-- vim.cmd [[ colorscheme NeoSolarized ]]
+-- vim.cmd [[ set background=light ]]
 
 -- nvim-tree
 vim.opt.termguicolors = true

@@ -27,3 +27,6 @@ vim.opt.expandtab = true
 vim.bo.softtabstop = 3
 
 vim.opt.undofile = true
+
+-- override highlight group
+vim.cmd(':hi MatchParen cterm=bold guifg=bg1 guibg=base1')

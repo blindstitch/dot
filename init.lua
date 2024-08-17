@@ -1,5 +1,6 @@
 require('autosave') -- more generically this is my functions
 -- require('tex')
+require('packersetup')
 require('plugins')
 require('pluginsettings')
 require('build')

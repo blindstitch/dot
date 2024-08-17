@@ -6,8 +6,12 @@
 -- total shit to check if gitted or not. processes the output of git-ls-files
 -- (by checking if it said "fatal:" or not) and will return true if it is under
 -- version control, false if not, nil if it gets no output (unlikely).
+-- 
+-- Note that you have to commit the file after git add. It will autosave
+-- regardless of any commit status.
 --
--- When comparing the filenames with words[1] it might break with a space in the path.
+-- When comparing the filenames with words[1] it might break with a space in
+-- the path.
 --
 
 function isbufgitted()
@@ -49,6 +53,7 @@ require("auto-save").setup({
 })
 
 -- Autocommand
+-- Auto-reload is unreliable
 vim.api.nvim_exec([[
     augroup IsGitted
         autocmd!

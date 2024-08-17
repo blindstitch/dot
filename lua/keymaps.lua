@@ -9,6 +9,8 @@ vim.g.mapleader = " "
 
 keymap("n", "zz", ":ZenMode<CR>", opts)
 
+keymap("i", "<c-Space>", "<Escape>", opts)
+
 -- Better movement, mostly to make HHKB and laptop typing less painful
 keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)
@@ -49,6 +51,12 @@ keymap("n", "<leader>rr", ":lua build()<CR>", opts) -- run build command
 -- Undo tree
 vim.keymap.set('n', '<leader>uu', vim.cmd.UndotreeToggle)
 
+-- TODOs
+keymap("n", "<leader>tt", ":vimgrep /% TODO / **/*.tex | copen<CR>", opts)
+keymap("n", "tp", ":cprev<CR>", opts)
+keymap("n", "tn", ":cnext<CR>", opts)
+
+
 
 -- Telescope
 local builtin = require('telescope.builtin')
@@ -58,6 +66,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', ":Telescope heading<CR>", {})
 vim.keymap.set('n', '<leader>fz', ":Telescope current_buffer_fuzzy_find<CR>", {})
 vim.keymap.set('n', '<leader>fr', ":Telescope registers<CR>", {})
+vim.keymap.set('n', '<leader>fq', ":Telescope quickfix<CR>", {})
 
 
 -- "Nice" stuff for writing
@@ -66,6 +75,18 @@ vim.keymap.set('n', '<leader>n1b', "vipJV:s;\\. ;.\\r;g<CR>", {}) -- presumably 
 vim.keymap.set('n', '<leader>n2b', "vipJV:s;\\. ;.\\r\\r;g<CR>", {}) -- presumably add two.
 vim.keymap.set('n', '<leader>nh-', "yypVr-o<Esc>", {}) -- add a "nice header" made of hyphens.
 vim.keymap.set('n', '<leader>nh=', "yypVr=o<Esc>", {}) -- add a "nice header" made of equal signs.
+
+-- Quickfix
+vim.keymap.set('n', '<leader>cn', ":cnext<CR>", {})
+vim.keymap.set('n', '<leader>cp', ":cprev<CR>", {})
+vim.keymap.set('n', '<leader>cl', ":clast<CR>", {})
+vim.keymap.set('n', '<leader>cf', ":cfirst<CR>", {})
+
+-- System copy/paste
+vim.keymap.set('n', '<leader>vv', '"+p', {})
+vim.keymap.set('n', '<leader>cc', '"+y', {}) -- doesn't work
+
+
 
 -- formats the paragraph using latexindent.pl, latexindent still in homefolder
 -- i would love to have it only operate on tex but it doesn't work well for a command that is mixing normal mode and ex commands

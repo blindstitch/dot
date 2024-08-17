@@ -6,6 +6,7 @@ require('pluginsettings')
 require('build')
 -- require('lsp')
 require('keymaps')
+require('functions')
 
 -- vim.opt.swapfile = false
 

@@ -77,12 +77,16 @@ vim.keymap.set('n', '<leader>nh=', "yypVr=o<Esc>", {}) -- add a "nice header" ma
 --     vim.defer_fn(function()
 --         -- Now you can run an ex command
 --         -- there is also vim.fn.getreg() to work with the selected text via lua
---         vim.cmd('!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - ')
+--         vim.cmd('!perl /kt/repo/latexindent/latexindent.pl -m -l /kt/repo/latexindent/quick-start1.yaml -c /tmp/ - ')
 --     end, 50)
 --     vim.api.nvim_feedkeys('`m', 'n', true)
 -- end
 
-vim.keymap.set('n', '<leader>nf', "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m", {})
+-- -- need to port over the config
+-- vim.keymap.set('n', '<leader>nf', "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m", {})
+vim.keymap.set('n', '<leader>nf', "mmvip:!latexindent -m  -c /tmp/ - <CR>`m", {})
+
+vim.keymap.set('n','<leader>tc',":!texcount %<Enter>", {})
 
 
 -- interface

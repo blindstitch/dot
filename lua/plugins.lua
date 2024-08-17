@@ -34,5 +34,6 @@ return require('packer').startup(function(use)
   -- use 'projekt0n/github-nvim-theme' -- shit sucks
   use 'baeuml/summerfruit256.vim'
   use 'jsit/toast.vim'
+  use 'kylechui/nvim-surround'
  
 end)

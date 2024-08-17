@@ -1,6 +1,7 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
+-- Had to comment out to get everything to install
 local pluginsettings = require('pluginsettings')
 
 return require('packer').startup(function(use)

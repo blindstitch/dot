@@ -1,7 +1,5 @@
 -- Auto-save settings are in autosave.lua
 
-vim.cmd [[ colorscheme NeoSolarized ]]
-vim.cmd [[ set background=light ]]
 -- disabling for now because I am using Fail Windows Ubuntu
 -- vim.cmd [[ colorscheme NeoSolarized ]]
 -- vim.cmd [[ set background=light ]]
@@ -13,14 +11,20 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup()
 
-local telescope = require('telescope')
--- the extensions are not setup anymore
-telescope.setup({
-    -- ...
+require('telescope').setup({
+--  These are getting ignored completely.
+  defaults = {
+    layout_config = {
+      vertical = {
+        prompt_position = 'top',
+        mirror = true, -- Display results in reverse order
+      },
+    },
+  },
     extensions = {
-        heading = {
-	    picker_opts = {sorting_strategy = 'ascending'},
-            treesitter = true,
+      heading = {
+        picker_opts = {sorting_strategy = 'ascending'},
+          treesitter = true,
         },
     },
 })
@@ -46,7 +50,7 @@ require('zen-mode').setup({
     -- * an absolute number of cells when > 1
     -- * a percentage of the width / height of the editor when <= 1
     -- * a function that returns the width or the height
-    width = 120, -- width of the Zen window
+    width = 100, -- width of the Zen window
     height = 1, -- height of the Zen window
     -- by default, no options are changed for the Zen window
     -- uncomment any of the options below, or add other vim.wo options you want to apply

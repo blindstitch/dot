@@ -30,3 +30,11 @@ vim.opt.undofile = true
 
 -- override highlight group
 vim.cmd(':hi MatchParen cterm=bold guifg=bg1 guibg=base1')
+
+-- fix middle click paste?
+-- no worky - online claims (incorrectly) that it's not on vim's end, which can't be right
+-- because vim is pasting from its buffers that are not stored in the system
+if vim.fn.has('mouse') == 1 then
+    vim.o.mouse = 'a'
+    vim.api.nvim_set_keymap('n', '<MiddleMouse>', '<Nop>', {noremap = true})
+end

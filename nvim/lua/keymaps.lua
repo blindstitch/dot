@@ -105,7 +105,7 @@ vim.keymap.set('n', '<leader>cc', '"+y', {}) -- doesn't work
 
 -- -- need to port over the config
 -- vim.keymap.set('n', '<leader>nf', "mmvip:!perl /home/karl/temp/latexindent/latexindent.pl/latexindent.pl -m -l /home/karl/temp/latexindent/quick-start1.yaml -c /tmp/ - <CR>`m", {})
-vim.keymap.set('n', '<leader>nf', "mmvip:!latexindent -m  -c /tmp/ - <CR>`m", {})
+vim.keymap.set('n', '<leader>nf', "mmvip:!latexindent -m -l /kt/repo/latexindent/kt-indent.yaml  -c /tmp/ - <CR>`m", {})
 
 vim.keymap.set('n','<leader>tc',":!texcount %<Enter>", {})
 
